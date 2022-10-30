@@ -3,6 +3,7 @@
 </script>
 
 <template>
+  <!--min-height: 100%; font for all; box-sizing: border-box;-->
   <div class="min-h-full font-Poppins box-border">
     <router-view />
   </div>
