@@ -2,7 +2,8 @@ import { defineStore } from 'pinia'
 
 export const useShadowsStore = defineStore('shadows', {
   state: () => ({
-    data: []
+    data: [],
+    page: 0,
   }),
 /*  getters: {
     finishedTodos(state) {
@@ -26,11 +27,18 @@ export const useShadowsStore = defineStore('shadows', {
     },
   },*/
   actions: {
+    setPage(page) {
+      this.page = page;
+    },
     getData() {
-      fetch("http://localhost:3002/")// заментить на переменную с путем
+      let url = ('http://localhost:3002/?' + // заментить на переменную с путем
+        new URLSearchParams({ page: this.page }).toString()
+      );
+      fetch(url)
         .then(res => res.json())
         .then(data => {
-          this.data = data;
+          this.data.push(...data);
+          console.log(this.data);
         });
     }
   },

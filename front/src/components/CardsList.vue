@@ -17,6 +17,7 @@
         >
           <Card :eyeShadow="eyeShadow"/>
         </div>
+        <div ref="intersectionTrigger"></div>
       </div>
     </div>
   </div>
@@ -25,17 +26,33 @@
 <script>
   import Card from "@/components/Card.vue";
   import { useShadowsStore } from "@/stores/shadows.js";
-  import { storeToRefs } from 'pinia'
+  import { storeToRefs } from 'pinia';
+  import { ref, watch } from "vue";
+  import { makeUseInfiniteScroll } from "vue-use-infinite-scroll";
   export default {
     name: "cards_list",
     components: {
       Card,
     },
     setup() {
+      const useInfiniteScroll = makeUseInfiniteScroll({});
+      const intersectionTrigger = ref(null);
+      const pageRef = useInfiniteScroll(intersectionTrigger);
       const store = useShadowsStore();
-      store.getData();
+
+      watch(
+        pageRef,
+        page => {
+          store.setPage(page-1);
+          store.getData();
+        },
+        { immediate: true }
+      );
+
+
+      //store.getData();
       const { data } = storeToRefs(store);
-      return { store, data }
+      return { store, data, intersectionTrigger }
     }
   };
 </script>
