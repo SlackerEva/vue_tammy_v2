@@ -49,8 +49,6 @@
         { immediate: true }
       );
 
-
-      //store.getData();
       const { data } = storeToRefs(store);
       return { store, data, intersectionTrigger }
     }

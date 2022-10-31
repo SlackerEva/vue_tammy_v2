@@ -1,5 +1,5 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import CardsList from "@/components/CardsList.vue";
+import CardsList from "@/views/CardsList.vue";
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -7,11 +7,7 @@ const router = createRouter({
     {
       path: "/",
       name: "cards_list",
-      component: CardsList,
-      meta: {
-        title: "cards_list",
-        auth: false,
-      },
+      component: CardsList
     },
   ]
 })
