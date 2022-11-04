@@ -1,7 +1,8 @@
 const express = require('express');
-const router = express.Router();
 const { getShadows } = require('../controllers/shadows');
 
-router.get('/', getShadows);
+const shadowsRoutes = express.Router();
 
-module.exports = router;
+shadowsRoutes.get('/', getShadows);
+
+exports.shadowsRoutes = shadowsRoutes;

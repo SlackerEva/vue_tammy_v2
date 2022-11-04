@@ -10,7 +10,7 @@
     </div>
     <!--   -->
     <form
-      @submit.prevent="login"
+      @submit.prevent="onSubmit"
       class="p-8 flex flex-col bg-light-grey rounded-md shadow-lg"
     >
       <h1 class="text-3xl text-light-green mb-4">
@@ -59,7 +59,7 @@
         Login
       </button>
 
-      <router-link class="mt-6 text-center" :to="'/'">
+      <router-link class="mt-6 text-center" :to="{ name: 'user_register' }">
         У вас нет аккаунта? 
         <span class="text-light-green">
           Зарегестрироваться
@@ -72,14 +72,19 @@
 <script>
   import { ref } from "vue";
  // import { useRouter } from "vue-router";
- //:to="{ name: 'user_register' }"
+  import { useAuthStore } from "@/stores/auth.js";
   export default {
     name: "user_login",
     setup() {
       const email = ref(null);
       const password = ref(null);
       const errorMsg = ref(null);
-      return { email, password, errorMsg, };
+
+      const onSubmit = () => {
+        const store = useAuthStore();
+        store.authorize(email.value, password.value);
+      }
+      return { email, password, errorMsg, onSubmit};
     },
   };
 </script>

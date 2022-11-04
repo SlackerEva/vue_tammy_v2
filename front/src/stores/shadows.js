@@ -31,14 +31,23 @@ export const useShadowsStore = defineStore('shadows', {
       this.page = page;
     },
     getData() {
-      let url = ('http://localhost:3002/?' + // заментить на переменную с путем
-        new URLSearchParams({ page: this.page }).toString()
-      );
-      fetch(url)
+      const token = localStorage.getItem('token');
+      const APISettings = {
+        headers: new Headers({
+            'Accept': 'application/json',
+            "Content-Type": "application/json",
+            "Authorization" : `Bearer ${token}`
+        }),
+    }
+      // заментить на переменную с путем
+      let url = ('http://localhost:3002/?' + new URLSearchParams({ page: this.page }).toString());
+      fetch(url, {
+        method: 'GET',
+        headers: APISettings.headers
+      })
         .then(res => res.json())
         .then(data => {
           this.data.push(...data);
-          console.log(this.data);
         });
     }
   },
