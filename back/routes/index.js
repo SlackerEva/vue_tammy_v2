@@ -9,8 +9,8 @@ const NotFoundError = require('../errors/not_found_error');
 router.post('/register', validateSignUp, createUser);
 router.post('/login', validateSignIn, login);
 
-router.use(auth);
 router.use(shadowsRoutes);
+router.use(auth);
 
 router.all('*', () => {
   throw new NotFoundError('Такой страницы не существует');

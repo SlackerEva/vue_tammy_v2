@@ -88,10 +88,10 @@
   //     }
       const store = useAuthStore();
       const { user } = storeToRefs(store);
-      console.log(user);
       function logout() {
         store.logout();
-        router.push({ name: "cards_list" });
+        window.location.reload();
+        //router.push("cards_list");
       }
       return {logout, user}
       //return { logout, user, filteredData, data, isOpen, onClick, search, searchedList };
