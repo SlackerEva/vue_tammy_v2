@@ -15,7 +15,7 @@ export const useAuthStore = defineStore('users', {
           this.user = value.user;
           localStorage.setItem('user', JSON.stringify(this.user));
           if (value.token) {
-              localStorage.setItem("token", value.token);
+              localStorage.setItem('token', value.token);
               router.push('/');
               //window.location.reload();
               //return;
@@ -36,6 +36,11 @@ export const useAuthStore = defineStore('users', {
         .catch((err)=>{
           console.log(err);
         });
+    },
+
+    logout() {
+      localStorage.removeItem('token');
+      localStorage.removeItem('user');
     }
   },
 })

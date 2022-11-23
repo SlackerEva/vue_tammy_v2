@@ -98,10 +98,7 @@ export default {
     const errorMsg = ref(null);
 
     const onSubmit = () => {
-      console.log("sdf");
       const store = useAuthStore();
-      console.log(email.value);
-      console.log(password.value);
       store.register(email.value, password.value);
     }
 
