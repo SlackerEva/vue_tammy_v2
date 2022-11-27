@@ -14,7 +14,7 @@
       class="p-8 flex flex-col bg-light-grey rounded-md shadow-lg"
     >
       <h1 class="text-3xl text-light-green mb-4">
-        Login
+        Вход
       </h1>
 
       <div class="flex flex-col mb-2">
@@ -22,7 +22,7 @@
           for="email" 
           class="mb-1 text-light-green"
         >
-          Email
+          Почта
         </label>
         <input
           type="text"
@@ -38,7 +38,7 @@
           for="password" 
           class="mb-1 text-light-green"
         >
-          Password
+          Пароль
         </label>
         <input
           type="password"
@@ -56,7 +56,7 @@
         border-solid border-2 border-transparent 
         hover:border-light-green hover:bg-white hover:text-light-green"
       >
-        Login
+        Войти
       </button>
 
       <router-link class="mt-6 text-center" :to="{ name: 'user_register' }">

@@ -45,10 +45,10 @@
       </div>
       <ul class="flex flex-1 justify-end gap-x-10">
         <router-link v-if="!user" class="cursor-pointer" :to="{ name: 'user_login' }">
-          Login
+          Вход
         </router-link>
         <li v-if="user" @click="logout" class="cursor-pointer">
-          Logout
+          Выход
         </li>
       </ul> 
     </nav>

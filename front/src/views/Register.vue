@@ -15,7 +15,7 @@
       class="p-8 flex flex-col bg-light-grey rounded-md shadow-lg"
     >
       <h1 class="text-3xl text-light-green mb-4">
-        Register
+        Зарегестрироваться
       </h1>
 
       <div class="flex flex-col mb-2">
@@ -23,7 +23,7 @@
           for="email" 
           class="mb-1 text-light-green"
         >
-          Email
+          Почта
         </label>
         <input
           type="text"
@@ -39,7 +39,7 @@
           for="password" 
           class="mb-1 text-light-green"
         >
-          Password
+          Пароль
         </label>
         <input
           type="password"
@@ -55,7 +55,7 @@
           for="confirmPassword" 
           class="mb-1 text-light-green"
         >
-          Confirm password
+          Подтвердите пароль
         </label>
         <input
           type="password"
@@ -98,8 +98,12 @@ export default {
     const errorMsg = ref(null);
 
     const onSubmit = () => {
-      const store = useAuthStore();
-      store.register(email.value, password.value);
+      if (password === confirmPassword) {
+        const store = useAuthStore();
+        store.register(email.value, password.value);
+      } else {
+        errorMsg.value = 'Пароли не совпадают';
+      }
     }
 
     return { email, password, confirmPassword, errorMsg, onSubmit };
