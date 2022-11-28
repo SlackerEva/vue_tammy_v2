@@ -22,7 +22,7 @@ export const useAuthStore = defineStore('users', {
           }
         })
         .catch((err)=>{
-          console.log(err);
+          this.error = err;
         });
     },
   
@@ -34,7 +34,7 @@ export const useAuthStore = defineStore('users', {
           }
         })
         .catch((err)=>{
-          console.log(err);
+          this.error = err;
         });
     },
 

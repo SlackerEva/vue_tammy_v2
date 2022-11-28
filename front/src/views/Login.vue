@@ -1,11 +1,11 @@
 <template>
   <div class="max-w-screen-sm mx-auto px-4 py-10">
     <div 
-      v-if="errorMsg"
+      v-if="error"
       class="mb-10 p-4 rounded-md bg-light-grey shadow-lg"
     >
       <p class="text-red-500">
-        {{ errorMsg }}
+        {{ error }}
       </p>
     </div>
     <!--   -->
@@ -71,20 +71,20 @@
 
 <script>
   import { ref } from "vue";
- // import { useRouter } from "vue-router";
   import { useAuthStore } from "@/stores/auth.js";
+  import { storeToRefs } from 'pinia';
   export default {
     name: "user_login",
     setup() {
+      const store = useAuthStore();
       const email = ref(null);
       const password = ref(null);
-      const errorMsg = ref(null);
+      const { error } = storeToRefs(store);
 
       const onSubmit = () => {
-        const store = useAuthStore();
         store.authorize(email.value, password.value);
       }
-      return { email, password, errorMsg, onSubmit};
+      return { email, password, error, onSubmit};
     },
   };
 </script>

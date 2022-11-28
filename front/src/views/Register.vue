@@ -1,11 +1,11 @@
 <template>
   <div class="max-w-screen-sm mx-auto px-4 py-10">
     <div 
-      v-if="errorMsg" 
+      v-if="error" 
       class="mb-10 p-4 rounded-md bg-light-grey shadow-lg"
     >
       <p class="text-red-500">
-        {{ errorMsg }}
+        {{ error }}
       </p>
     </div>
 
@@ -89,24 +89,29 @@
 <script>
 import { ref } from "vue";
 import { useAuthStore } from "@/stores/auth.js";
+import { storeToRefs } from 'pinia';
+
 export default {
   name: "user_register",
   setup() {
+    const store = useAuthStore();
     const email = ref(null);
     const password = ref(null);
     const confirmPassword = ref(null);
-    const errorMsg = ref(null);
+    //const errorMsg = ref(null);
+    const { error } = storeToRefs(store);
 
     const onSubmit = () => {
-      if (password === confirmPassword) {
+      if (password.value === confirmPassword.value) {
         const store = useAuthStore();
         store.register(email.value, password.value);
       } else {
-        errorMsg.value = 'Пароли не совпадают';
+        console.log(password.value, confirmPassword.value);
+        store.error = 'Пароли не совпадают';
       }
     }
 
-    return { email, password, confirmPassword, errorMsg, onSubmit };
+    return { email, password, confirmPassword, error, onSubmit };
   },
 };
 </script>
