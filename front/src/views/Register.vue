@@ -98,7 +98,6 @@ export default {
     const email = ref(null);
     const password = ref(null);
     const confirmPassword = ref(null);
-    //const errorMsg = ref(null);
     const { error } = storeToRefs(store);
 
     const onSubmit = () => {
@@ -106,7 +105,6 @@ export default {
         const store = useAuthStore();
         store.register(email.value, password.value);
       } else {
-        console.log(password.value, confirmPassword.value);
         store.error = 'Пароли не совпадают';
       }
     }
