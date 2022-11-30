@@ -53,9 +53,20 @@
 </template>
 
 <script>
+  import { ref } from "vue";
+  import { useAuthStore } from "@/stores/auth.js";
+  import { storeToRefs } from 'pinia';
   export default {
     name: "user_forgotten-pass",
     setup() {
+      const store = useAuthStore();
+      const email = ref(null);
+      const { error } = storeToRefs(store);
+
+      const onSubmit = () => {
+        store.forgotten(email.value);
+      }
+      return { email, error, onSubmit};
     },
   };
 </script>

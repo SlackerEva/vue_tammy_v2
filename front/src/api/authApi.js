@@ -38,6 +38,35 @@ class Auth {
       return this._getResponseData(res);
     }); 
   }
+
+  forgotten = (email) => {
+    return fetch(`${this.url}/forgotten-pass`, {
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({email})
+    })
+    .then((res) => {
+      return this._getResponseData(res);
+    }); 
+  }
+
+  reset = (password, id, token) => {
+    console.log(password, id, token)
+    return fetch(`${this.url}/reset-pass`, {
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({password, id, token})
+    })
+    .then((res) => {
+      return this._getResponseData(res);
+    }); 
+  }
 }
 
 const auth = new Auth({

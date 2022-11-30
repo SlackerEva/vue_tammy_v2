@@ -5,6 +5,7 @@ import router from '@/router/index';
 export const useAuthStore = defineStore('users', {
   state: () => ({
     user: JSON.parse(localStorage.getItem('user')),
+    token:'',
     error: '',
   }),
 
@@ -28,6 +29,30 @@ export const useAuthStore = defineStore('users', {
   
     register(email, password) {
       auth.register(email, password)
+        .then((res) => {
+          if (res.statusCode !== 400){
+            router.push('/login');
+          }
+        })
+        .catch((err)=>{
+          this.error = err;
+        });
+    },
+
+    forgotten(email) {
+      auth.forgotten(email)
+        .then((res) => {
+          if (res.statusCode !== 400){
+            router.push('/login');
+          }
+        })
+        .catch((err)=>{
+          this.error = err;
+        });
+    },
+
+    reset(password, id, token) {
+      auth.reset(password, id, token)
         .then((res) => {
           if (res.statusCode !== 400){
             router.push('/login');

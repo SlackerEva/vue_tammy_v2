@@ -3,6 +3,7 @@ import CardsList from "@/views/CardsList.vue";
 import Login from "@/views/Login.vue";
 import Register from "@/views/Register.vue";
 import ForgottenPass from "@/views/Forgotten-pass.vue";
+import ResetPass from "@/views/Reset-pass.vue";
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -26,6 +27,12 @@ const router = createRouter({
       path: "/forgotten-pass",
       name: "user_forgotten-pass",
       component: ForgottenPass,
+    },
+    {
+      path: `/reset-password`,
+      name: "user_reset-pass",
+      component: ResetPass,
+      props: (route) => ({ id: route.query.id, token: route.query.token }),  
     },
   ]
 })

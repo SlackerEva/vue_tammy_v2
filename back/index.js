@@ -4,12 +4,11 @@ const cors = require('cors');
 const dotenv = require('dotenv');
 const { errors } = require('celebrate');
 const routes = require('./routes/index');
-//const session = require('express-session');
 const { middleError } = require('./middlewares/middleError');
 const { requestLogger, errorLogger } = require('./middlewares/logger');
 const NotFoundError = require('./errors/not_found_error');
 
-const { PORT = 3002, MONGO_URL = 'mongodb://localhost:27017/Tammy' } = process.env;
+const { PORT = process.env.PORT || 3002, MONGO_URL } = process.env;
 const app = express();
 
 app.use(cors()); 
