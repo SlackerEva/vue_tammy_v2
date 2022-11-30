@@ -1,4 +1,4 @@
-class Shadows {
+class UserShadow {
   
   constructor(config) {
     this.url = config.url;
@@ -12,20 +12,22 @@ class Shadows {
     return Promise.reject(new Error(`Ошибка: ${res.status}`));
   }
 
-  //Находит все тени, прогружает по 10-20, есть пагинация
-  getShadows(page) {
-    let newPageUrl = (this.url + '/?' + new URLSearchParams({ page: page }).toString());
-    return fetch(newPageUrl, {
-      method: 'GET',
-      headers: this.headers
+  //Добавляет связку пользователь-тень
+  insertUserShadow(shadowId) {
+    return fetch(this.url + '/add-user-shadow', {
+      method: 'POST',
+      headers: this.headers,
+      body: JSON.stringify({
+        shadowId: shadowId
+      })
     })
       .then((res) => {
         return this._getResponseData(res);
-      }); 
+      });
   }
 }
 
-const shadows = new Shadows({
+const userShadow = new UserShadow({
   url: 'http://localhost:3002',
   headers: new Headers({
     'Accept': 'application/json',
@@ -34,4 +36,4 @@ const shadows = new Shadows({
   })
 })
 
-export default shadows;
+export default userShadow;

@@ -32,13 +32,16 @@
 </template>
 <script>
   import { ref } from "vue";
+  import userShadow from "@/api/userShadowApi.js";
   export default {
     name: "bookmark_btn",
-    setup() {
+    props: {
+      shadowID: String,
+    },
+    setup(props) {
       const isDark = ref(false);
-
       const onClick = () => {
-
+        userShadow.insertUserShadow(props.shadowID);
       };
 
       return { isDark, onClick };

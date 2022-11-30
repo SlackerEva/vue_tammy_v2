@@ -12,7 +12,7 @@
     <h3 class="font-bold text-black-900 truncate">
       {{ eyeShadow.name }}
     </h3>
-    <Bookmark_btn :shadowID="eyeShadow.id" v-if="user"/>
+    <Bookmark_btn :shadowID="eyeShadow._id" v-if="user"/>
   </div>
 </template>
 
