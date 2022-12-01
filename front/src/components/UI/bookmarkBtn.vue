@@ -44,11 +44,6 @@
       const store = useShadowsStore();
       const { userShadows } = storeToRefs(store);
       const isDark = ref(store.find(props.shadowID));
-      //const isDark = userShadows.indexOf(props.shadowID) === -1;
-      //const isDark = props.shadowID in userShadows;
-    //  const x = store.find(props.shadowID);
-    //  isDark.value = x;
-    //  console.log(x);
       const onClick = () => {
         userShadow.insertUserShadow(props.shadowID);
         isDark.value = true;
