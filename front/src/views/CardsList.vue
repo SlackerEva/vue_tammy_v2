@@ -45,9 +45,11 @@
         page => {
           store.setPage(page-1);
           store.getData();
+          store.getUserShadows();//Попробуй сделать как с общей датой и прокинуть пэйдж дальше
         },
         { immediate: true }
       );
+      
 
       const { data } = storeToRefs(store);
       return { store, data, intersectionTrigger }

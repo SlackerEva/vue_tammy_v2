@@ -25,6 +25,16 @@ class UserShadow {
         return this._getResponseData(res);
       });
   }
+
+  getUserShadows() {
+    return fetch(this.url + '/get-user-shadows', {
+      method: 'GET',
+      headers: this.headers
+    })
+      .then((res) => {
+        return this._getResponseData(res);
+      });
+  }
 }
 
 const userShadow = new UserShadow({

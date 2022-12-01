@@ -33,18 +33,28 @@
 <script>
   import { ref } from "vue";
   import userShadow from "@/api/userShadowApi.js";
+  import { useShadowsStore } from "@/stores/shadows.js";
+  import { storeToRefs } from 'pinia';
   export default {
     name: "bookmark_btn",
     props: {
       shadowID: String,
     },
     setup(props) {
-      const isDark = ref(false);
+      const store = useShadowsStore();
+      const { userShadows } = storeToRefs(store);
+      const isDark = ref(store.find(props.shadowID));
+      //const isDark = userShadows.indexOf(props.shadowID) === -1;
+      //const isDark = props.shadowID in userShadows;
+    //  const x = store.find(props.shadowID);
+    //  isDark.value = x;
+    //  console.log(x);
       const onClick = () => {
         userShadow.insertUserShadow(props.shadowID);
+        isDark.value = true;
       };
 
-      return { isDark, onClick };
+      return { isDark, userShadows, onClick };
     }
   }
 </script>

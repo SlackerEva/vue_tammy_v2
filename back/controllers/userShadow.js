@@ -15,3 +15,16 @@ exports.addUserShadow = async (req, res) => {
       res.status(500).send(err);
     });
 };
+
+exports.getUserShadows = async (req, res) => {
+  const userId = req.user._id;
+  UserShadow.find({
+    user : userId
+  })
+    .then((userShadow) => { 
+      res.send(userShadow)
+    })
+    .catch((err) => {
+      res.status(500).send(err);
+    });
+};
