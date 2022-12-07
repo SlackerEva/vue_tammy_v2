@@ -16,6 +16,22 @@ exports.addUserShadow = async (req, res) => {
     });
 };
 
+exports.removeUserShadow = async (req, res) => {
+  const userId = req.user._id;
+  const { shadowId } = req.body;
+
+  UserShadow.findOneAndRemove({
+    user : userId,
+    shadow : shadowId
+  })
+    .then(() => { 
+      //res.send('Успешно удаленно')
+    })
+    .catch((err) => {
+      res.status(500).send(err);
+    });
+};
+
 exports.getUserShadows = async (req, res) => {
   const userId = req.user._id;
   UserShadow.find({

@@ -47,10 +47,17 @@
       //ищем есть ли тень у юзера и выстявляем isDark = true/flase в зависимости от ответа
       const isDark = ref(store.getShadowById(props.shadowID));
       
+      //удаление и добавление значения в таблице userShadows при нажатии на кнопку
       const onClick = () => {
-        userShadow.insertUserShadow(props.shadowID);
-        store.addNewUserShadow(props.shadowID);
-        isDark.value = true;
+        if (isDark.value === false) {
+          userShadow.insertUserShadow(props.shadowID);
+          store.addNewUserShadow(props.shadowID);
+          isDark.value = true;
+        } else {
+          userShadow.removeUserShadow(props.shadowID);
+          store.removeUserShadow(props.shadowID);
+          isDark.value = false;
+        }
       };
 
       return { isDark, userShadows, onClick, getShadowById };

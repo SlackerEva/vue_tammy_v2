@@ -38,6 +38,11 @@ export const useShadowsStore = defineStore('shadows', {
     },
     addNewUserShadow(shadowId) {
       this.userShadows.push(shadowId)
+    },
+    removeUserShadow(shadowId) {
+      this.userShadows = this.userShadows.filter((item) => {
+        return item !== shadowId;
+      });
     }
   },
 })

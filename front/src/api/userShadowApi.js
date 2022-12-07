@@ -12,7 +12,7 @@ class UserShadow {
     return Promise.reject(new Error(`Ошибка: ${res.status}`));
   }
 
-  //Добавляет связку пользователь-тень
+  //Добавляет значение в таблицу userShadows
   insertUserShadow(shadowId) {
     return fetch(this.url + '/add-user-shadow', {
       method: 'POST',
@@ -26,7 +26,21 @@ class UserShadow {
       });
   }
 
-  //Получает все связки пользователь-тень
+  //Удаляет значение из таблицы userShadows
+  removeUserShadow(shadowId) {
+    return fetch(this.url + '/remove-user-shadow', {
+      method: 'DELETE',
+      headers: this.headers(),
+      body: JSON.stringify({
+        shadowId: shadowId
+      })
+    })
+      .then((res) => {
+        return this._getResponseData(res);
+      });
+  }
+
+  //Получает все shadows конкретного user из таблицы userShadows
   getUserShadows() {
     return fetch(this.url + '/get-user-shadows', {
       method: 'GET',
