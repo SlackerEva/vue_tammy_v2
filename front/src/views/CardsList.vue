@@ -11,7 +11,7 @@
         gap-y-10 gap-x-6 xl:gap-x-8"
       >
         <div 
-          v-for="eyeShadow in data" 
+          v-for="eyeShadow in shadows" 
           :key="eyeShadow._id" 
           class="group shadow-lg"
         >
@@ -44,8 +44,8 @@
       const store = useShadowsStore();
 
       if (user.value) {
-        console.log(user.value);
         store.getUserShadows();
+        store.removeShadows();
       }
 
       watch(
@@ -54,13 +54,13 @@
           //console.log(pageRef, page-1);
           //page -1, потому что pageRef начинается с 1, если убрать первая 10 карточек пропадет
           store.setPage(page-1);
-          store.getData();
+          store.getShadows();
         },
         { immediate: true }
       );
 
-      const { data } = storeToRefs(store);
-      return { store, data, intersectionTrigger }
+      const { shadows } = storeToRefs(store);
+      return { store, shadows, intersectionTrigger }
     }
   };
 </script>

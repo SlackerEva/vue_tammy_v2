@@ -4,7 +4,7 @@ import userShadows from '@/api/userShadowApi.js';
 
 export const useShadowsStore = defineStore('shadows', {
   state: () => ({
-    data: [],
+    shadows: [],
     page: 0,
     userShadows:[],
   }),
@@ -36,11 +36,14 @@ export const useShadowsStore = defineStore('shadows', {
     setPage(page) {
       this.page = page;
     },
-    getData() {
+    getShadows() {
       shadows.getShadows(this.page)
         .then((res) => {
-          this.data.push(...res)
+          this.shadows.push(...res)
         });
+    },
+    removeShadows() {
+      this.shadows = [];
     },
     //это getter
     find(shadow) {
