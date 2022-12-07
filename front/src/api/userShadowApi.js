@@ -26,6 +26,7 @@ class UserShadow {
       });
   }
 
+  //Получает все связки пользователь-тень
   getUserShadows() {
     return fetch(this.url + '/get-user-shadows', {
       method: 'GET',

@@ -12,7 +12,7 @@ class Shadows {
     return Promise.reject(new Error(`Ошибка: ${res.status}`));
   }
 
-  //Находит все тени, прогружает по 10-20, есть пагинация
+  //Находит все тени, прогружает по 10, есть пагинация
   getShadows(page) {
     let newPageUrl = (this.url + '/?' + new URLSearchParams({ page: page }).toString());
     return fetch(newPageUrl, {

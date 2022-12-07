@@ -2,6 +2,7 @@ class Auth {
   
   constructor(config) {
     this.url = config.url;
+    this.headers = config.headers;
   }
 
   _getResponseData(res) {
@@ -14,10 +15,7 @@ class Auth {
   register (email, password) {
     return fetch(`${this.url}/register`, {
       method: 'POST',
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json'
-      },
+      headers: this.headers,
       body: JSON.stringify({email, password})
     })
     .then((res) => {
@@ -28,10 +26,7 @@ class Auth {
   authorize = (email, password) => {
     return fetch(`${this.url}/login`, {
       method: 'POST',
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json'
-      },
+      headers: this.headers,
       body: JSON.stringify({email, password})
     })
     .then((res) => {
@@ -42,10 +37,7 @@ class Auth {
   forgotten = (email) => {
     return fetch(`${this.url}/forgotten-pass`, {
       method: 'POST',
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json'
-      },
+      headers: this.headers,
       body: JSON.stringify({email})
     })
     .then((res) => {
@@ -56,10 +48,7 @@ class Auth {
   reset = (password, id, token) => {
     return fetch(`${this.url}/reset-pass`, {
       method: 'POST',
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json'
-      },
+      headers: this.headers,
       body: JSON.stringify({password, id, token})
     })
     .then((res) => {
@@ -70,6 +59,10 @@ class Auth {
 
 const auth = new Auth({
   url: 'http://localhost:3002',
+  headers: new Headers({
+    'Accept': 'application/json',
+    "Content-Type": "application/json",
+  })
 })
 
 export default auth;

@@ -9,29 +9,11 @@ export const useShadowsStore = defineStore('shadows', {
     userShadows:[],
   }),
   getters: {
-
+    //это геттер потому что мы осуществляем поиск и ничего не меняем в стейте
+    getShadowById: (state) => {
+      return (shadowId) => state.userShadows.indexOf(shadowId) === -1 ? false : true;
+    }
   },
-/*  getters: {
-    finishedTodos(state) {
-      // autocompletion! ✨
-      return state.todos.filter((todo) => todo.isFinished)
-    },
-    unfinishedTodos(state) {
-      return state.todos.filter((todo) => !todo.isFinished)
-    },
-    /**
-     * @returns {{ text: string, id: number, isFinished: boolean }[]}
-     
-    filteredTodos(state) {
-      if (this.filter === 'finished') {
-        // call other getters with autocompletion ✨
-        return this.finishedTodos
-      } else if (this.filter === 'unfinished') {
-        return this.unfinishedTodos
-      }
-      return this.todos
-    },
-  },*/
   actions: {
     setPage(page) {
       this.page = page;
@@ -45,11 +27,6 @@ export const useShadowsStore = defineStore('shadows', {
     removeShadows() {
       this.shadows = [];
     },
-    //это getter
-    find(shadow) {
-      return this.userShadows.indexOf(shadow) === -1 ? false : true;
-    },
-
     getUserShadows() {
       userShadows.getUserShadows()
         .then((res) => {

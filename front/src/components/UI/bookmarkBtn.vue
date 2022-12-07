@@ -31,7 +31,6 @@
   </button>
 </template>
 <script>
-  import { ref } from "vue";
   import userShadow from "@/api/userShadowApi.js";
   import { useShadowsStore } from "@/stores/shadows.js";
   import { storeToRefs } from 'pinia';
@@ -42,8 +41,10 @@
     },
     setup(props) {
       const store = useShadowsStore();
-      const { userShadows } = storeToRefs(store);
-      const isDark = ref(store.find(props.shadowID));
+      const { userShadows, getShadowById } = storeToRefs(store);
+
+      //ищем есть ли тень у юзера и выстявляем isDark = true/flase в зависимости от ответа
+      const isDark = store.getShadowById(props.shadowID);
 
       //Надо Добавлять в массив Id тени которую отметили
       const onClick = () => {
@@ -51,7 +52,7 @@
         isDark.value = true;
       };
 
-      return { isDark, userShadows, onClick };
+      return { isDark, userShadows, onClick, getShadowById };
     }
   }
 </script>
