@@ -9,7 +9,7 @@ export const useShadowsStore = defineStore('shadows', {
     userShadows:[],
   }),
   getters: {
-    //это геттер потому что мы осуществляем поиск и ничего не меняем в стейте
+    //это геттер, мы осуществляем поиск и ничего не меняем в стейте
     getShadowById: (state) => {
       return (shadowId) => state.userShadows.indexOf(shadowId) === -1 ? false : true;
     }
@@ -35,6 +35,9 @@ export const useShadowsStore = defineStore('shadows', {
           })
           this.userShadows.push(...shadowArr);
         });
+    },
+    addNewUserShadow(shadowId) {
+      this.userShadows.push(shadowId)
     }
   },
 })

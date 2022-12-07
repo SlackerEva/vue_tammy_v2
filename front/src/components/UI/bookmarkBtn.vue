@@ -34,6 +34,7 @@
   import userShadow from "@/api/userShadowApi.js";
   import { useShadowsStore } from "@/stores/shadows.js";
   import { storeToRefs } from 'pinia';
+  import { ref } from "vue";
   export default {
     name: "bookmark_btn",
     props: {
@@ -44,11 +45,11 @@
       const { userShadows, getShadowById } = storeToRefs(store);
 
       //ищем есть ли тень у юзера и выстявляем isDark = true/flase в зависимости от ответа
-      const isDark = store.getShadowById(props.shadowID);
-
-      //Надо Добавлять в массив Id тени которую отметили
+      const isDark = ref(store.getShadowById(props.shadowID));
+      
       const onClick = () => {
         userShadow.insertUserShadow(props.shadowID);
+        store.addNewUserShadow(props.shadowID);
         isDark.value = true;
       };
 
