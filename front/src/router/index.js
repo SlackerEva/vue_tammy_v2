@@ -33,7 +33,7 @@ const router = createRouter({
       name: "user_reset-pass",
       component: ResetPass,
       props: (route) => ({ id: route.query.id, token: route.query.token }),  
-    },
+    }
   ]
 })
 

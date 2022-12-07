@@ -26,8 +26,9 @@
 <script>
   import Card from "@/components/Card.vue";
   import { useShadowsStore } from "@/stores/shadows.js";
+  import { useAuthStore } from "@/stores/auth.js";
   import { storeToRefs } from 'pinia';
-  import { ref, watch } from "vue";
+  import { ref,watch  } from "vue";
   import { makeUseInfiniteScroll } from "vue-use-infinite-scroll";
   export default {
     name: "cards_list",
@@ -38,13 +39,20 @@
       const useInfiniteScroll = makeUseInfiniteScroll({});
       const intersectionTrigger = ref(null);
       const pageRef = useInfiniteScroll(intersectionTrigger);
+      const userStore = useAuthStore();
+      const { user } = storeToRefs(userStore);
       const store = useShadowsStore();
 
-      store.getUserShadows();
+      if (user.value) {
+        console.log(user.value);
+        store.getUserShadows();
+      }
 
       watch(
         pageRef,
         page => {
+          //console.log(pageRef, page-1);
+          //page -1, потому что pageRef начинается с 1, если убрать первая 10 карточек пропадет
           store.setPage(page-1);
           store.getData();
         },

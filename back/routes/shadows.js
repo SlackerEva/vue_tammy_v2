@@ -3,6 +3,6 @@ const { getShadows } = require('../controllers/shadows');
 
 const shadowsRoutes = express.Router();
 
-shadowsRoutes.get('/', getShadows);
+shadowsRoutes.get('/',getShadows);
 
 exports.shadowsRoutes = shadowsRoutes;

@@ -44,6 +44,8 @@
       const store = useShadowsStore();
       const { userShadows } = storeToRefs(store);
       const isDark = ref(store.find(props.shadowID));
+
+      //Надо Добавлять в массив Id тени которую отметили
       const onClick = () => {
         userShadow.insertUserShadow(props.shadowID);
         isDark.value = true;

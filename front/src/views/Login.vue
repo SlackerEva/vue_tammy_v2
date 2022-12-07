@@ -78,13 +78,14 @@
   import { ref } from "vue";
   import { useAuthStore } from "@/stores/auth.js";
   import { storeToRefs } from 'pinia';
+
   export default {
     name: "user_login",
     setup() {
       const store = useAuthStore();
       const email = ref(null);
       const password = ref(null);
-      const { error } = storeToRefs(store);
+      const { error} = storeToRefs(store);
 
       const onSubmit = () => {
         store.authorize(email.value, password.value);

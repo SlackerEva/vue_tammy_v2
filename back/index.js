@@ -7,15 +7,17 @@ const routes = require('./routes/index');
 const { middleError } = require('./middlewares/middleError');
 const { requestLogger, errorLogger } = require('./middlewares/logger');
 const NotFoundError = require('./errors/not_found_error');
+//const cookieParser = require('cookie-parser');
 
 const { PORT = process.env.PORT || 3002, MONGO_URL } = process.env;
 const app = express();
-
+require('dotenv').config(); 
 app.use(cors()); 
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(requestLogger);
+//app.use(cookieParser());
 app.use(routes);
 
 app.get('/crash-test', () => {

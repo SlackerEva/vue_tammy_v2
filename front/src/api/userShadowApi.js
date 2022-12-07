@@ -16,7 +16,7 @@ class UserShadow {
   insertUserShadow(shadowId) {
     return fetch(this.url + '/add-user-shadow', {
       method: 'POST',
-      headers: this.headers,
+      headers: this.headers(),
       body: JSON.stringify({
         shadowId: shadowId
       })
@@ -29,7 +29,7 @@ class UserShadow {
   getUserShadows() {
     return fetch(this.url + '/get-user-shadows', {
       method: 'GET',
-      headers: this.headers
+      headers: this.headers()
     })
       .then((res) => {
         return this._getResponseData(res);
@@ -39,7 +39,7 @@ class UserShadow {
 
 const userShadow = new UserShadow({
   url: 'http://localhost:3002',
-  headers: new Headers({
+  headers: () => new Headers({
     'Accept': 'application/json',
     "Content-Type": "application/json",
     "Authorization" : `Bearer ${localStorage.getItem('token')}`

@@ -1,7 +1,6 @@
 import { defineStore } from 'pinia';
 import auth from '@/api/authApi.js';
 import router from '@/router/index';
-
 export const useAuthStore = defineStore('users', {
   state: () => ({
     user: JSON.parse(localStorage.getItem('user')),
@@ -17,9 +16,8 @@ export const useAuthStore = defineStore('users', {
           localStorage.setItem('user', JSON.stringify(this.user));
           if (value.token) {
               localStorage.setItem('token', value.token);
-              router.push('/');
-              //window.location.reload();
-              //return;
+              router.push("/");
+              //location.reload(true);
           }
         })
         .catch((err)=>{
@@ -66,6 +64,7 @@ export const useAuthStore = defineStore('users', {
     logout() {
       localStorage.removeItem('token');
       localStorage.removeItem('user');
+      router.push("/");
     }
   },
 })

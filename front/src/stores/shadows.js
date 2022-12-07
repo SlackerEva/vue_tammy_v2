@@ -42,16 +42,18 @@ export const useShadowsStore = defineStore('shadows', {
           this.data.push(...res)
         });
     },
+    //это getter
     find(shadow) {
       return this.userShadows.indexOf(shadow) === -1 ? false : true;
     },
+
     getUserShadows() {
       userShadows.getUserShadows()
         .then((res) => {
           const shadowArr = res.map((obj) => {
             return obj.shadow;
           })
-          this.userShadows.push(...shadowArr)
+          this.userShadows.push(...shadowArr);
         });
     }
   },

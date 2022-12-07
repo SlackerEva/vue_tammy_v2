@@ -54,7 +54,6 @@ class Auth {
   }
 
   reset = (password, id, token) => {
-    console.log(password, id, token)
     return fetch(`${this.url}/reset-pass`, {
       method: 'POST',
       headers: {
