@@ -42,24 +42,33 @@
       const userStore = useAuthStore();
       const { user } = storeToRefs(userStore);
       const store = useShadowsStore();
+      const { shadows } = storeToRefs(store);
+      const { toLoad } = storeToRefs(store);
 
       if (user.value) {
         store.getUserShadows();
-        store.removeShadows();
       }
 
       watch(
         pageRef,
         page => {
-          //console.log(pageRef, page-1);
-          //page -1, потому что pageRef начинается с 1, если убрать первая 10 карточек пропадет
-          store.setPage(page-1);
-          store.getShadows();
+          store.setPage(page);
         },
         { immediate: true }
       );
 
-      const { shadows } = storeToRefs(store);
+      watch(
+        toLoad, reset,
+        { immediate: true }
+      );
+
+      function reset() {
+        const page = store.getPage;
+          console.log("paginator reset triggered: " + page);
+          console.log(pageRef);
+          pageRef.value = page; 
+      }
+
       return { store, shadows, intersectionTrigger }
     }
   };

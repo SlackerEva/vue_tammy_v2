@@ -34,7 +34,7 @@
           w-full md:w-64 p-2.5" 
         />
         <button 
-          @click="searchedList"
+          @click="onSearchClick"
           class="inline-block text-sm px-4 py-2 leading-none 
           border rounded text-white border-white
           hover:border-transparent hover:text-teal-500 
@@ -56,45 +56,28 @@
 </template>
 
 <script>
-  // import store from "@/store/store.js";
-  // import { ref } from "vue";
-  // import { computed } from "vue";
-  // import { supabase } from "../supabase/init";
-  // import { useRouter } from "vue-router";
+  import { useShadowsStore } from "@/stores/shadows.js";
+  import { ref } from "vue";
   import { storeToRefs } from 'pinia';
   import { useAuthStore } from "@/stores/auth.js";
 
   export default {
-    setup() {
-  //     let search = ref("");
-  //     // Get user from store
-  //     const user = computed(() => store.state.user);
-  //     const filteredData = computed(() => store.state.filteredData);
-  //     const data = computed(() => store.state.data);
-  //     // Setup ref to router
-  //     const router = useRouter();
-  //     const isOpen = ref(false);
-
-  //     const onClick = () => { 
-  //       store.methods.setOpenDrawer(!isOpen.value);
-  //       isOpen.value = !isOpen.value
-  //     };
-
-  //     function searchedList() {
-  //       store.methods.setFilteredData(data.value.filter((data) => {
-  //         return data.name.toLowerCase().includes(search.value.toLowerCase()) ||
-  //         data.nameEn.toLowerCase().includes(search.value.toLowerCase())
-  //       }));
-  //     }
+    setup(context) {
+      let search = ref("");
       const store = useAuthStore();
       const { user } = storeToRefs(store);
+      const shadowStore = useShadowsStore();
+
+      function onSearchClick() {
+         shadowStore.setSearchStr(search.value);
+      }
+
       function logout() {
         store.logout();
         window.location.reload();
         //router.push("cards_list");
       }
-      return {logout, user}
-      //return { logout, user, filteredData, data, isOpen, onClick, search, searchedList };
+      return {logout, user, onSearchClick, search}
     },
   };
 </script>
