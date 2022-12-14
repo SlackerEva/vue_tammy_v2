@@ -1,4 +1,5 @@
 <template>
+  <SideBar />
   <div class="bg-white">
     <!-- margin-auto, max-w-80rem, paddings, -->
     <div 
@@ -24,6 +25,7 @@
 </template>
 
 <script>
+  import SideBar from "@/components/Side-bar.vue";
   import Card from "@/components/Card.vue";
   import { useShadowsStore } from "@/stores/shadows.js";
   import { useAuthStore } from "@/stores/auth.js";
@@ -34,6 +36,7 @@
     name: "cards_list",
     components: {
       Card,
+      SideBar
     },
     setup() {
       const useInfiniteScroll = makeUseInfiniteScroll({});

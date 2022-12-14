@@ -1,7 +1,7 @@
 <template>
   <header class="bg-light-green text-white">
     <nav class="py-5 px-5 md:px-14 flex flex-col sm:flex-row gap-4 items-center">
-      <button v-if="user" @click="onClick">
+      <button v-if="user" @click="onSideBarClick">
         <svg 
           xmlns="http://www.w3.org/2000/svg" 
           fill="none" 
@@ -62,14 +62,18 @@
   import { useAuthStore } from "@/stores/auth.js";
 
   export default {
-    setup(context) {
+    setup() {
       let search = ref("");
       const store = useAuthStore();
       const { user } = storeToRefs(store);
       const shadowStore = useShadowsStore();
 
+      function onSideBarClick() {
+        shadowStore.setSideBarOpen();
+      }
+
       function onSearchClick() {
-         shadowStore.setSearchStr(search.value);
+        shadowStore.setSearchStr(search.value);
       }
 
       function logout() {
@@ -77,7 +81,7 @@
         window.location.reload();
         //router.push("cards_list");
       }
-      return {logout, user, onSearchClick, search}
+      return {logout, user, onSearchClick, search, onSideBarClick}
     },
   };
 </script>

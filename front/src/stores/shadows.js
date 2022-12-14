@@ -6,6 +6,7 @@ const ENTITIES_ON_PAGE = 30;
 
 export const useShadowsStore = defineStore('shadows', {
   state: () => ({
+    isOpen: false,
     shadows: [],
     alreadyLoaded: 0,
     toLoad: 0,
@@ -22,6 +23,9 @@ export const useShadowsStore = defineStore('shadows', {
     }
   },
   actions: {
+    setSideBarOpen() {
+      this.isOpen = !this.isOpen;
+    },
     setPage(page) {
       console.log("Set page: " + page);
       this.toLoad = page * ENTITIES_ON_PAGE;
