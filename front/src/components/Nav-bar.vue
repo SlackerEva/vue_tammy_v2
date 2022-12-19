@@ -73,6 +73,7 @@
       }
 
       function onSearchClick() {
+        //надо ли дописать 2 аргумент?
         shadowStore.setFilters('all')
         shadowStore.setSearchStr(search.value);
       }

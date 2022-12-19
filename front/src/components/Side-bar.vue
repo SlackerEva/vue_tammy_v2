@@ -131,50 +131,14 @@
       //   const filteredData = computed(() => store.state.filteredData);
       //   const data = computed(() => store.state.data);
         const radioChk = ref('all');
-        const chkbxChk = ref([]);
+        const chkbxChk = ref(['rare', 'powder', 'palette', 'coin']);
         const store = useShadowsStore();
         const { isOpen } = storeToRefs(store);
         
         const onClick = () => {
-          store.setFilters(radioChk.value);
+          store.setFilters(radioChk.value, chkbxChk.value);
           store.setSearchStr('');
         }
-        
-      //   const getMarked = async () => {
-      //     try {
-      //       let { data: markedSh, error } = await supabase.from('userShadows').select(`eyeShadows (*)`).eq('user', user.value).limit(8).range(store.state.page, 8);
-      //       if (error) throw error;
-      //       if (markedSh) {
-      //         if (chkbxChk.value.length !== 0) {
-      //           store.methods.setFilteredData(markedSh.filter(i => chkbxChk.value.includes(i.eyeShadows.type)).map(i => i.eyeShadows));
-      //         } else {
-      //           store.methods.setFilteredData(markedSh.map(i => i.eyeShadows));
-      //         }
-      //       }
-      //     } catch (error) {
-      //       console.warn(error.message);
-      //     }
-      //   };
-  
-      //   const getUnmarked = async () => {
-      //     try {
-      //       let { data: markedSh, error } = await supabase.from('userShadows').select(`eyeShadows (id)`).eq('user', user.value);
-      //       markedSh = markedSh.map(i => i.eyeShadows.id).toString();
-      //       if (markedSh) {
-      //         let { data: unmarkedSh, error } = await supabase.from('eyeShadows').select(`*`).not('id', 'in', `(${markedSh})`).limit(8).range(store.state.page, 8);
-      //         if (error) throw error;
-      //         if (chkbxChk.value.length !== 0) {
-      //           store.methods.setFilteredData(unmarkedSh.filter(i => chkbxChk.value.includes(i.type)));
-      //         } else {
-      //           store.methods.setFilteredData(unmarkedSh);
-      //         }
-  
-      //       }
-      //       if (error) throw error;
-      //     } catch (error) {
-      //       console.warn(error.message);
-      //     }
-      //   };
   
       //   const getRandom = async () => {
       //     try {

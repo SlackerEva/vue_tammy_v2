@@ -13,7 +13,7 @@ export const useShadowsStore = defineStore('shadows', {
     userShadows:[],
     searchStr: '',
     mainFilter: 'all',
-    typeFilter: [],
+    typeFilter: ['rare', 'powder', 'palette', 'coin'],
   }),
   getters: {
     getPage() {
@@ -43,8 +43,9 @@ export const useShadowsStore = defineStore('shadows', {
       this.setPage(0);
       this.setPage(1);
     },
-    setFilters(filter) {
-      this.mainFilter = filter;
+    setFilters(mainF, typeF) {
+      this.mainFilter = mainF;
+      this.typeFilter = typeF;
     },
     getShadows() {
       if (this.alreadyLoaded < this.toLoad) {
