@@ -73,6 +73,7 @@
       }
 
       function onSearchClick() {
+        shadowStore.setFilters('all')
         shadowStore.setSearchStr(search.value);
       }
 

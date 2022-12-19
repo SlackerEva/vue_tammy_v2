@@ -11,7 +11,7 @@
             block w-full p-2.5" 
             v-model="radioChk"
           >
-            <option value="all">Показать все</option>
+            <option value="all">Показать всё</option>
             <option value="marked">Показать отмеченные</option>
             <option value="unmarked">Показать не отмеченные</option>
           </select>
@@ -105,7 +105,7 @@
             hover:border-transparent hover:text-teal-500 
             hover:bg-white hover:border-teal-500" 
           >
-            Показать
+            Применить
           </button>
           <button 
             @click="getRandom" 
@@ -124,28 +124,21 @@
   <script>
     import { useShadowsStore } from "@/stores/shadows.js";
     import { storeToRefs } from 'pinia';
-    // import { computed } from "vue";
-    //import { ref } from "vue";
+    import { ref } from "vue";
     export default {
-      name: "right_drawer",
+      name: "side-bar",
       setup()  {
       //   const filteredData = computed(() => store.state.filteredData);
       //   const data = computed(() => store.state.data);
-      //   const radioChk = ref('all');
-      //   const chkbxChk = ref([]);
+        const radioChk = ref('all');
+        const chkbxChk = ref([]);
         const store = useShadowsStore();
         const { isOpen } = storeToRefs(store);
-        //const isOpen = store.isOpen;
-      //   const user = computed(() => store.state.user.id);
-      //   const onClick = () => {
-      //     if (radioChk.value === 'marked') {
-      //       getMarked();
-      //     } else if (radioChk.value === 'unmarked') {
-      //       getUnmarked();
-      //     } else {
-      //       store.methods.setFilteredData(data.value);
-      //     }
-      //   }
+        
+        const onClick = () => {
+          store.setFilters(radioChk.value);
+          store.setSearchStr('');
+        }
         
       //   const getMarked = async () => {
       //     try {
@@ -197,7 +190,7 @@
       //     }
       //   };
       //   return { isOpen, onClick, radioChk, chkbxChk, user, filteredData, getMarked, getUnmarked, getRandom };
-        return {isOpen}
+        return {isOpen, onClick, radioChk, chkbxChk}
       },
     }
   </script>

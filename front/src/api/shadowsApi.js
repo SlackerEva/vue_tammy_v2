@@ -13,8 +13,8 @@ class Shadows {
   }
 
   //Находит все тени, прогружает по 10, есть пагинация
-  getShadows(from, to, searchStr) {
-    let newPageUrl = (this.url + '/?' + new URLSearchParams({ from: from, to: to, str: searchStr }).toString());
+  getShadows(from, to, searchStr, mainF, typeF, userShadows) {
+    let newPageUrl = (this.url + '/?' + new URLSearchParams({ from: from, to: to, str: searchStr, mainF: mainF, typeF: typeF, userShadows: userShadows }).toString());
     return fetch(newPageUrl, {
       method: 'GET',
       headers: this.headers

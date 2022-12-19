@@ -67,8 +67,8 @@
 
       function reset() {
         const page = store.getPage;
-          console.log("paginator reset triggered: " + page);
-          console.log(pageRef);
+        //  console.log("paginator reset triggered: " + page);
+        //  console.log(pageRef);
           pageRef.value = page; 
       }
 

@@ -11,13 +11,14 @@ export const useShadowsStore = defineStore('shadows', {
     alreadyLoaded: 0,
     toLoad: 0,
     userShadows:[],
-    searchStr: ''
+    searchStr: '',
+    mainFilter: 'all',
+    typeFilter: [],
   }),
   getters: {
     getPage() {
       return this.toLoad / ENTITIES_ON_PAGE;
     },
-    //это геттер, мы осуществляем поиск и ничего не меняем в стейте
     getShadowById: (state) => {
       return (shadowId) => state.userShadows.indexOf(shadowId) === -1 ? false : true;
     }
@@ -27,27 +28,30 @@ export const useShadowsStore = defineStore('shadows', {
       this.isOpen = !this.isOpen;
     },
     setPage(page) {
-      console.log("Set page: " + page);
+    //  console.log("Set page: " + page);
       this.toLoad = page * ENTITIES_ON_PAGE;
       if (this.toLoad < this.alreadyLoaded) {
         this.shadows.splice(this.toLoad, this.alreadyLoaded - this.toLoad);
-        console.log("Updated shadows: " + this.shadows);
+      //  console.log("Updated shadows: " + this.shadows);
         this.alreadyLoaded = this.toLoad;
       }
       this.getShadows();
     },
     setSearchStr(searchStr) {
-      console.log("Set search str: " + searchStr);
+    //  console.log("Set search str: " + searchStr);
       this.searchStr = searchStr;
       this.setPage(0);
       this.setPage(1);
     },
+    setFilters(filter) {
+      this.mainFilter = filter;
+    },
     getShadows() {
       if (this.alreadyLoaded < this.toLoad) {
-        console.log("Get shadows: (" + this.searchStr + ", " + this.alreadyLoaded + "," + this.toLoad + ")");
-        shadows.getShadows(this.alreadyLoaded, this.toLoad, this.searchStr)
+      //  console.log("Get shadows: (" + this.searchStr + ", " + this.alreadyLoaded + "," + this.toLoad + ")");
+        shadows.getShadows(this.alreadyLoaded, this.toLoad, this.searchStr, this.mainFilter, this.typeFilter, this.userShadows)
           .then((res) => {
-            console.log("Backend result: " + res);
+          //  console.log("Backend result: " + res);
             this.shadows.push(...res)
           });
           this.alreadyLoaded = this.toLoad;
