@@ -74,7 +74,7 @@
 
       function onSearchClick() {
         //надо ли дописать 2 аргумент?
-        shadowStore.setFilters('all')
+        shadowStore.setFilters('all',['rare', 'powder', 'palette', 'coin'])
         shadowStore.setSearchStr(search.value);
       }
 

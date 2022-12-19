@@ -30,7 +30,10 @@ exports.getShadows = (req, res) => {
       });
   } else {
     // console.log("From, To: (" + from + ", " + to + ")");
-    Shadow.find({ name: new RegExp(str, 'i') }).skip(from).limit(to - from)
+    Shadow.find({ 
+      name: new RegExp(str, 'i'),
+      type: {$in : typeFArr}  
+    }).skip(from).limit(to - from)
       .then((shadow) => { 
         res.send(shadow)
       })
