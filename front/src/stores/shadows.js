@@ -13,7 +13,7 @@ export const useShadowsStore = defineStore('shadows', {
     userShadows:[],
     searchStr: '',
     mainFilter: 'all',
-    typeFilter: ['rare', 'powder', 'palette', 'coin'],
+    typeFilter: ['rare', 'powder', 'palette', 'coin']
   }),
   getters: {
     getPage() {
@@ -52,7 +52,7 @@ export const useShadowsStore = defineStore('shadows', {
       //  console.log("Get shadows: (" + this.searchStr + ", " + this.alreadyLoaded + "," + this.toLoad + ")");
         shadows.getShadows(this.alreadyLoaded, this.toLoad, this.searchStr, this.mainFilter, this.typeFilter, this.userShadows)
           .then((res) => {
-          //  console.log("Backend result: " + res);
+            console.log("Backend result: " + res);
             this.shadows.push(...res)
           });
           this.alreadyLoaded = this.toLoad;

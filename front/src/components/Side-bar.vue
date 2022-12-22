@@ -105,7 +105,7 @@
             Применить
           </button>
           <button 
-            @click="getRandom" 
+            @click="onClickRandom" 
             class="bg-teal-500 border rounded border-white w-full leading-none
             px-4 py-3 mt-4
             text-white text-base
@@ -125,8 +125,6 @@
     export default {
       name: "side-bar",
       setup()  {
-      //   const filteredData = computed(() => store.state.filteredData);
-      //   const data = computed(() => store.state.data);
         const radioChk = ref('all');
         const chkbxChk = ref(['rare', 'powder', 'palette', 'coin']);
         const store = useShadowsStore();
@@ -136,22 +134,13 @@
           store.setFilters(radioChk.value, chkbxChk.value);
           store.setSearchStr('');
         }
-  
-      //   const getRandom = async () => {
-      //     try {
-      //       let { data: markedSh, error } = await supabase.from('userShadows').select(`eyeShadows (*)`).eq('user', user.value).limit(8).range(store.state.page, 8);
-      //       if (error) throw error;
-      //       if (markedSh) {
-      //         let leng = markedSh.length;
-      //         let random = Math.floor(Math.random() * leng);
-      //         store.methods.setFilteredData(markedSh[random]);
-      //       }
-      //     } catch (error) {
-      //       console.warn(error.message);
-      //     }
-      //   };
-      //   return { isOpen, onClick, radioChk, chkbxChk, user, filteredData, getMarked, getUnmarked, getRandom };
-        return {isOpen, onClick, radioChk, chkbxChk}
+
+        const onClickRandom = () => {
+          store.setFilters('random');
+          store.setSearchStr('');
+        }
+
+        return {isOpen, onClick, radioChk, chkbxChk, onClickRandom}
       },
     }
   </script>

@@ -1,5 +1,5 @@
 <template>
-  <header class="bg-light-green text-white">
+  <header class="bg-light-green text-white sticky top-0">
     <nav class="py-5 px-5 md:px-14 flex flex-col sm:flex-row gap-4 items-center">
       <button v-if="user" @click="onSideBarClick">
         <svg 
@@ -20,7 +20,7 @@
       <div class="flex items-center gap-x-4">
         <router-link :to="{ name: 'cards_list' }">
           <h1 class="text-lg">
-            Tammy
+            Tammy Mania
           </h1>
         </router-link>
       </div>
